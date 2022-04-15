@@ -1,0 +1,46 @@
+###############################################################################
+# Install http-repl
+###############################################################################
+$ dotnet tool install -g Microsoft.dotnet-httprepl
+
+
+###############################################################################
+# Test PostTodoItem:
+###############################################################################
+connect https://localhost:7125/api/todoitems
+post -h Content-Type=application/json -c "{"name":"Walk Casey and Pooh Bear","isComplete":true}"
+
+connect https://localhost:7125/api/todoitems
+post -h Content-Type=application/json -c "{"name":"Feed Casey and Pooh Bear","isComplete":true}"
+
+connect https://localhost:7125/api/todoitems
+post -h Content-Type=application/json -c "{"name":"Take Casey and Pooh Bear to Dog Park","isComplete":true}"
+
+
+###############################################################################
+# Test the location header URI
+###############################################################################
+httprepl https://localhost:7125/api/todoitems/1
+get
+
+connect https://localhost:7125/api/todoitems/1
+get
+
+###############################################################################
+# Examine the GET methods
+###############################################################################
+connect https://localhost:7125/api/todoitems
+get
+
+###############################################################################
+# Test the PutTodoItem method
+###############################################################################
+connect https://localhost:7125/api/todoitems/1
+put -h Content-Type=application/json -c "{"id":1,"name":"feed fish","isComplete":true}"
+
+###############################################################################
+# Test the DeleteTodoItem method
+###############################################################################
+connect https://localhost:7125/api/todoitems/1
+delete
+
